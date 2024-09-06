@@ -1,8 +1,13 @@
 #!/bin/bash
 
-read -p "Seu dominio(SEM ESPAÇOS): " DOMAIN
-read -p "Usuario: " NOIPUSER
-read -p "Chave: " NOIPPASS
+# DOMINIO CRIADO NO NO-IP
+DOMAIN=""
+
+# USUARIO DO NO-IP
+NOIPUSER=""
+
+# SENHA DO NO-IP
+NOIPPASS=""
 # Criando script para atualizar dominio DNS
 
 cat <<EOF>/home/ec2-user/update-domain.sh
