@@ -21,6 +21,9 @@ EOF
 
 chmod +x /home/ec2-user/update-domain.sh
 
+# Executando o script para atualizar o DNS pela primeira vez
+bash /home/ec2-user/update-domain.sh
+
 # Criando daemon para executar o script quando o sistema iniciar
 
 sudo cat <<EOF>/etc/systemd/system/update-dns.service
