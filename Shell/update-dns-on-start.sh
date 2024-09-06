@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Chaves para acesso remoto
-KEYS=""
-
 # DOMINIO CRIADO NO NO-IP
 DOMAIN=""
 
@@ -11,10 +8,6 @@ NOIPUSER=""
 
 # SENHA DO NO-IP
 NOIPPASS=""
-
-# Configurando o arquivo de chaves autorizadas
-
-echo $KEYS >> /home/ec2-user/.ssh/authorized_keys
 
 # Criando script para atualizar dominio DNS
 
