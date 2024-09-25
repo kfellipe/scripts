@@ -1,3 +1,4 @@
+cat <<EOF>/etc/nginx/nginx.conf
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
@@ -91,3 +92,5 @@ http {
 #    }
 
 }
+
+EOF
