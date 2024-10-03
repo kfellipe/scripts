@@ -1,3 +1,6 @@
+# SEU DOMINIO
+DOMINIO=""
+
 cat <<EOF>/etc/nginx/nginx.conf
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
@@ -66,8 +69,8 @@ http {
 #        server_name  _;
         root         /usr/share/nginx/html;
 #
-        ssl_certificate "/etc/letsencrypt/live/semanaaws.ddns.net/fullchain.pem";
-        ssl_certificate_key "/etc/letsencrypt/live/semanaaws.ddns.net/privkey.pem";
+        ssl_certificate "/etc/letsencrypt/live/$DOMINIO/fullchain.pem";
+        ssl_certificate_key "/etc/letsencrypt/live/$DOMINIO/privkey.pem";
 #        ssl_session_cache shared:SSL:1m;
 #        ssl_session_timeout  10m;
 #        ssl_ciphers PROFILE=SYSTEM;
