@@ -2,16 +2,12 @@
 DOMINIO=""
 
 cat <<EOF>/etc/nginx/nginx.conf
-# For more information on configuration, see:
-#   * Official English Documentation: http://nginx.org/en/docs/
-#   * Official Russian Documentation: http://nginx.org/ru/docs/
 
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log notice;
 pid /run/nginx.pid;
 
-# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
 include /usr/share/nginx/modules/*.conf;
 
 events {
@@ -33,67 +29,29 @@ http {
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
     include /etc/nginx/conf.d/*.conf;
 
-#    server {
-#        listen       80;
-#        listen       [::]:80;
-#        server_name  _;
-#        root         /usr/share/nginx/html;
-
-        # Load configuration files for the default server block.
-#        include /etc/nginx/default.d/*.conf;
-
-#        error_page 404 /404.html;
-#        location = /404.html {
-#        }
-
- #       error_page 500 502 503 504 /50x.html;
- #       location = /50x.html {
-#        }
-#    }
 	upstream fastapi {
 		server localhost:8000;
-	}
+		}
 	upstream flask {
 		server localhost:5000;
-	}
-# Settings for a TLS enabled server.
-#
+		}
     server {
         listen       443 ssl http2;
-#        listen       [::]:443 ssl http2;
-#        server_name  _;
         root         /usr/share/nginx/html;
-#
         ssl_certificate "/etc/letsencrypt/live/$DOMINIO/fullchain.pem";
         ssl_certificate_key "/etc/letsencrypt/live/$DOMINIO/privkey.pem";
-#        ssl_session_cache shared:SSL:1m;
-#        ssl_session_timeout  10m;
-#        ssl_ciphers PROFILE=SYSTEM;
-#        ssl_prefer_server_ciphers on;
-#
 	location /api {
 		proxy_pass http://fastapi;
-	}
+		}
 	location / {
 		proxy_pass http://flask;
+		}
 	}
-#        # Load configuration files for the default server block.
-#        include /etc/nginx/default.d/*.conf;
-#
-#        error_page 404 /404.html;
-#        location = /404.html {
-}
-#
-#        error_page 500 502 503 504 /50x.html;
-#        location = /50x.html {
-#        }
-#    }
 
 }
 
 EOF
+
+systemctl restart nginx
